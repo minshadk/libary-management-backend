@@ -9,9 +9,7 @@ exports.createComment = async (req, res) => {
     const { bookId, comment } = req.body
     console.log(bookId, userId, comment)
 
-    // Check if the bookId and userId exist
     const bookExists = await Book.findById(bookId)
-    // console.log(bookExists)
     const userExists = await User.findById(userId)
     console.log(userExists)
     if (!bookExists) return res.status(404).json({ message: 'Book not found' })

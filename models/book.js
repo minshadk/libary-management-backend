@@ -6,11 +6,6 @@ const bookSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // authorId: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'Author',
-    //   required: true,
-    // },
     coverUrl: {
       type: String,
     },
@@ -29,12 +24,15 @@ const bookSchema = new mongoose.Schema(
       default: true,
     },
     language: String,
-    userId: {
+    bookOwnerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
     },
-    pickedDate: {  
+    borrowedUserId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    pickedDate: {
       type: Date,
     },
   },

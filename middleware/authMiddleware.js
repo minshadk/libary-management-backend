@@ -12,7 +12,7 @@ exports.protect = async (req, res, next) => {
     try {
       // fetching token from request
       token = req.headers.authorization.split(" ")[1];
-
+ 
       // Verify token
       const decoded = jwt.verify(token, process.env.SECRET);
       // geting user from the token

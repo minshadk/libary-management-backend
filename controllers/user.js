@@ -39,7 +39,7 @@ exports.logIn = async (req, res) => {
     console.log(err)
     res.status(400).json({
       status: 'failed',
-      message: 'Invalid data send',
+      message: 'Invalid user credentials',
     })
   }
 }
