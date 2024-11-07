@@ -1,8 +1,12 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-router.post('/', commentController.createComment);
-router.get('/:bookId', commentController.getCommentsByBook);
-router.put('/:id', commentController.updateComment);
-router.delete('/:id', commentController.deleteComment);
+const comment = require('../controllers/comments')
+const protect = require('../middleware/authMiddleware')
+
+router.post('/', protect.protect, comment.createComment)
+router.get('/:bookId', comment.getCommentsByBook)
+router.put('/:id', comment.updateComment)
+router.delete('/:id', comment.deleteComment)
+
 module.exports = router

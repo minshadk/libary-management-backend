@@ -9,8 +9,12 @@ app.use(express.json());
 
 
 // ROUTES
-const bookRotues = require("./routes/book")
+const bookRotes = require("./routes/book")
+const userRotes = require("./routes/user")
+const commentRotes = require("./routes/comments")
 
-app.use('/book',bookRotues)
+app.use('/book',bookRotes)
+app.use('/user',userRotes)
+app.use('/comment',commentRotes)
 
 module.exports = app;  

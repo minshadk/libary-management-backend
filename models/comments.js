@@ -1,17 +1,17 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const commentSchema = new mongoose.Schema(
   {
-    book: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Book',
-        required: true,
-      },
-      userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-      },
+    bookId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Book',
+      required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     comment: {
       type: String,
     },
@@ -20,9 +20,8 @@ const commentSchema = new mongoose.Schema(
     //   default: [],
     // },
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
-module.exports = mongoose.model("Comment", commentSchema);
-
- 
+const Comment = mongoose.model('Comment', commentSchema)
+module.exports = Comment
