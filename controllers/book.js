@@ -18,23 +18,13 @@ exports.createBook = async (req, res) => {
 
 exports.getAllBooks = async (req, res) => {
   try {
-    const books = await Book.find()
+    const books = await Book.find().populate('borrowedUserId')
     res.json(books)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
 }
 
-// exports.getAllBorrowedBooks = async (req, res) => {
-//   try {
-//     const userId = req.user._id
-
-//     const books = await Book.find()
-//     res.json(books)
-//   } catch (error) {
-//     res.status(500).json({ message: error.message })
-//   }
-// }
 exports.getAllBorrowedBooks = async (req, res) => {
   try {
     const userId = req.user._id
@@ -46,21 +36,10 @@ exports.getAllBorrowedBooks = async (req, res) => {
     }).populate('borrowedUserId')
     // const books = await Book.find()
     res.json(books)
- 
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
 }
-
-// exports.getBookById = async (req, res) => {
-//   try {
-//     const book = await Book.findById(req.params.id).populate('author')
-//     if (!book) return res.status(404).json({ message: 'Book not found' })
-//     res.json(book)
-//   } catch (error) {
-//     res.status(500).json({ message: error.message })
-//   }
-// }
 
 exports.getBookById = async (req, res) => {
   try {
@@ -84,7 +63,7 @@ exports.updateBook = async (req, res) => {
 
     const book = await Book.findByIdAndUpdate(
       req.params.id,
-      { ...req.body, borrowedUserId }, // Add borrowedUserId to the update
+      { ...req.body, borrowedUserId }, 
       { new: true },
     )
 
