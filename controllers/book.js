@@ -18,7 +18,9 @@ exports.createBook = async (req, res) => {
 
 exports.getAllBooks = async (req, res) => {
   try {
-    const books = await Book.find().populate('borrowedUserId')
+    const books = await Book.find()
+      .populate('borrowedUserId')
+      .populate('bookOwnerId')
     res.json(books)
   } catch (error) {
     res.status(500).json({ message: error.message })
@@ -42,17 +44,17 @@ exports.getAllBorrowedBooks = async (req, res) => {
 }
 exports.getAllOwnedBooks = async (req, res) => {
   try {
-    console.log("get all owned books is called")
+    console.log('get all owned books is called')
     const userId = req.user._id
     console.log(userId)
 
     const books = await Book.find({
-      borrowedUserId: userId,
+      bookOwnerId: userId,
     }).populate('borrowedUserId')
     console.log(books)
     res.json(books)
   } catch (error) {
-    res.status(500).json({ message: error.message }) 
+    res.status(500).json({ message: error.message })
   }
 }
 
@@ -78,7 +80,7 @@ exports.updateBook = async (req, res) => {
 
     const book = await Book.findByIdAndUpdate(
       req.params.id,
-      { ...req.body, borrowedUserId }, 
+      { ...req.body, borrowedUserId },
       { new: true },
     )
 
