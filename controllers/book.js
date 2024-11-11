@@ -40,6 +40,21 @@ exports.getAllBorrowedBooks = async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 }
+exports.getAllOwnedBooks = async (req, res) => {
+  try {
+    console.log("get all owned books is called")
+    const userId = req.user._id
+    console.log(userId)
+
+    const books = await Book.find({
+      borrowedUserId: userId,
+    }).populate('borrowedUserId')
+    console.log(books)
+    res.json(books)
+  } catch (error) {
+    res.status(500).json({ message: error.message }) 
+  }
+}
 
 exports.getBookById = async (req, res) => {
   try {

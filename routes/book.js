@@ -5,6 +5,7 @@ const book = require('../controllers/book')
 const protect = require('../middleware/authMiddleware')
 
 router.get('/borrowedBooks', protect.protect, book.getAllBorrowedBooks)
+router.get('/ownedBooks', protect.protect, book.getAllOwnedBooks)
 router.post('/', protect.protect, book.createBook)
 router.get('/', book.getAllBooks)
 router.get('/:id', book.getBookById)
